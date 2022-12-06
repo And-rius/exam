@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'tasks' %}">Grįžti</a>
+<form method="POST">
+  {% csrf_token %}
+  <p>Ar tikrai norite ištrinti? "{{task}}"</p>
+  <input type="submit" value="Trinti"/>
+</form>
+
+</body>
+</html>
