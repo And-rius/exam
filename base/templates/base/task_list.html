@@ -11,29 +11,46 @@
 <div class="header-bar">
     <div>
         <h1>Sveiki {{request.user|title}}</h1>
-        <h3 style="margin:0">Tu turi <i>{{count}}</i> neįvykdytas užduotis</h3>
+        <h3 style="margin:0">Tu turi <i>{{count}}</i> neįvykdytų užduočių</h3>
     </div>
+    {% if request.user.is_authenticated %}
+<!--    <p>{{request.user}}</p>-->
+    <a href="{% url 'logout' %}">Atsijungti</a>
+    {% else %}
+    <a href="{% url 'login' %}">Prisijungti</a>
+    {% endif %}
 </div>
-
-
-{% if request.user.is_authenticated %}
-<p>{{request.user}}</p>
-<a href="{% url 'logout' %}">Atsijungti</a>
-{% else %}
-<a href="{% url 'login' %}">Prisijungti</a>
-{% endif %}
 
 <hr>
 <h1> Mano užrašinė {{color}}</h1>
-
 <a href="{% url 'task-create' %}">Pridėti</a>
-
 <form method="GET">
     <input type='text' name='search-area' value="{{search_input}}">
     <input type="submit" value="Ieškoti">
 
 </form>
 
+<div class="task-items-wrapper">
+    {% for task in tasks %}
+        <div class="task-wrapper">
+            {% if task.complete %}
+                <div class="task-title">
+                    <div class="task-complete-icon"></div>
+                    <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i>
+                </div>
+            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            {% else %}
+             <div class="task-title">
+                    <div class="task-incomplete-icon"></div>
+                    <a href="{% url 'task-update' task.id %}">{{task}}</a>
+                </div>
+            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            {% endif %}
+        </div>
+    {% empty %}
+    <h3>Užrašų nėra!</h3>
+    {% endfor %}
+</div>
 <table>
     <tr>
         <th>Pavadinimas</th>
