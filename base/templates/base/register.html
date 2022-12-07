@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <title>Prisijungti</title>
+    <title>Registruotis</title>
 </head>
 <body>
 {% extends 'base/main.html' %}
 {% block content %}
-<h1>Prisijungimas</h1>
+<h1>Registruotis</h1>
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" value="Prisijungti">
+    <input type="submit" value="Register">
 </form>
-<p>Ar neturite prisijungimo? <a href="{% url 'register' %}">Registruotis</a></p>
+<p>Jau turiu prisijungimą! <a href="{% url 'login' %}">Prisijungti</a></p>
 </body>
 </html>
 {% endblock content %}

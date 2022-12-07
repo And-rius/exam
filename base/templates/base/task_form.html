@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Užrašo tekstas</title>
 </head>
 <body>
-<h3>Task form</h3>
-<a href="{% url 'tasks' %}" >Go back</a>
+{% extends 'base/main.html' %}
+{% block content %}
+<h3>Užrašo tekstas</h3>
+<a href="{% url 'tasks' %}" >Grįžti</a>
 <form method="POST" action="">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="Submit" value="submit">
+    <input type="Submit" value="Patvirtinti">
 </form>
 
 </body>
 </html>
+{% endblock content %}

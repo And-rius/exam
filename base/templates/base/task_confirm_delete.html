@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Trinti</title>
 </head>
 <body>
+{% extends 'base/main.html' %}
+{% block content %}
 <a href="{% url 'tasks' %}">Grįžti</a>
 <form method="POST">
   {% csrf_token %}
@@ -14,3 +16,4 @@
 
 </body>
 </html>
+{% endblock content %}
